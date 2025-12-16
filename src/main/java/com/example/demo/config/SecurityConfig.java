@@ -1,1 +1,5 @@
-package com.example.demo.conf
+package com.example.demo.config;
+
+public class SecurityConfig{
+    
+}
