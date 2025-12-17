@@ -12,13 +12,14 @@ public class User{
         STAFF
     }
     @Id
-    @generatedValue(strategy=generationType.IDENTITY)
+    @GeneratedValue(strategy=generationType.IDENTITY)
     private Long id;
     private String name;
     @column(unique=true)
     private String email;
     private String password;
-    private Role role=Role=STAFF;
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.STAFF;
      public Long getId() {
         return id;
     }
@@ -49,13 +50,14 @@ public class User{
     public void setRole(Role role) {
         this.role = role;
     }
-    public User(Long id,String name,String email,String password,String role){
+    public User(Long id,String name,String email,String password, Role role){
         this.id=id;
         this.name=name;
         this.email=email;
         this.password=password;
         this.role=role;
     }
+    public User(){}
 
 
 }

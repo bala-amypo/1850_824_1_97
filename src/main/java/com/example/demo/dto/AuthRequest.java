@@ -1,5 +1,5 @@
-package com.example.demo.dto;
+// package com.example.demo.dto;
 
-public class AuthRequest{
+// public class AuthRequest{
     
-}
+// }
