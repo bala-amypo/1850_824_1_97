@@ -8,9 +8,11 @@ import jakarta.persistence.Entity;
 @Entity
 public class User{
     @Id
+    @generatedValue(strategy=generationType.Identity)
     private Long id;
     private String name;
     @column(unique=true)
     private String email;
+    
     private String role;
 }
