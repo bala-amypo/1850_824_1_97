@@ -27,6 +27,18 @@ public class Student{
     public void setName(string name){
         this.name=name;
     }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getRollNumber() {
+        return rollNumber;
+    }
+    public void setRollNumber(String rollNumber) {
+        this.rollNumber = rollNumber;
+    }
 
 
 
