@@ -8,10 +8,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Column;
 @Entity
 public class User{
-    public enum Role{
-        ADMIN,
-        STAFF
-    }
+    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +18,10 @@ public class User{
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role = Role.STAFF;
+    public enum Role{
+        ADMIN,
+        STAFF
+    }
      public Long getId() {
         return id;
     }
