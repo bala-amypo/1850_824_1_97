@@ -13,10 +13,10 @@ public class User{
         STAFF
     }
     @Id
-    @GeneratedValue(strategy=generationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @column(unique=true)
+    @Column(unique=true)
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
