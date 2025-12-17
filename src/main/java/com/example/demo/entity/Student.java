@@ -6,13 +6,7 @@ import jakarta.persistence.GeneratedType;
 import jakarta.persistence.Entity;
 
 @Entity
-public class User{
+public class Student{
     @Id
-    @generatedValue(strategy=generationType.Identity)
-    private Long id;
-    private String name;
-    @column(unique=true)
-    private String email;
-    
-    private String role;
+    @GeneratedValue(strateg)
 }
