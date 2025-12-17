@@ -10,7 +10,10 @@ public class Student{
     @Id
     @GeneratedValue(strategy=GenerationType.Identity)
     private Long id;
+    private String name;
     @column(unique=true)
-    private String templateName;
+    private String email;
+    private String rollNumber;
+    
 
 }
