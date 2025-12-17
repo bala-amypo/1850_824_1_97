@@ -45,6 +45,12 @@ public class Student{
     public void setRollNumber(String rollNumber) {
         this.rollNumber = rollNumber;
     }
+    public Student(Long id,String name,String email,String rollNumber){
+        this.id=id;
+        this.name=name;
+        this.email=email;
+        this.rollNumber=rollNumber;
+    }
 
 
 
