@@ -51,7 +51,7 @@ public class Student{
         this.email=email;
         this.rollNumber=rollNumber;
     }
-
+public Student(){}
 
 
 }
