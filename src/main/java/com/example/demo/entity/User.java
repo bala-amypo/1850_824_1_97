@@ -1,9 +1,11 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.Entity;
 
-@Id
+@Entity
 public class User{
+    @Id
     private Long id;
     private String name;
     @column(unique=true)
