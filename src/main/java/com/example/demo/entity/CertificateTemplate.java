@@ -6,4 +6,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
-public class 
+@Entity
+public class CertificateTemplate{
+    @Id
+    private Long id;
+    
+}
