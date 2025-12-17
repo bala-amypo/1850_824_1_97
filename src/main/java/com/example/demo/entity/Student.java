@@ -2,16 +2,16 @@ package com.example.demo.entity;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GeneratedType;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Entity;
-
+import jakarta.persistence.Column;
 @Entity
 public class Student{
     @Id
-    @GeneratedValue(strategy=GenerationType.Identity)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @column(unique=true)
+    @Column(unique=true)
     private String email;
     private String rollNumber;
 
@@ -27,7 +27,7 @@ public class Student{
     public void setName(string name){
         this.name=name;
     }
-    
+
 
 
 }
