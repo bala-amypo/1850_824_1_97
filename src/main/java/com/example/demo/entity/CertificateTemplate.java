@@ -52,6 +52,12 @@ public class CertificateTemplate{
         this.signatureName = signatureName;
     }
     public CertificateTemplate(Long id,String templateName,String backgroundUrl,String fontStyle,String signatureName){
-        this.
+        this.id=id;
+        this.templateName=templateName;
+        this.backgroundUrl=backgroundUrl;
+        this.fontStyle=fontStyle;
+        this.signatureName=signatureName;
+
     }
+    public CertificateTemplate(){}
 }
