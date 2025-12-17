@@ -10,5 +10,7 @@ import jakarta.persistence.GenerationType;
 public class CertificateTemplate{
     @Id
     private Long id;
-    @Column()
+    @Column(unique=true)
+    private String templateName;
+    private String backgroundUrl
 }
