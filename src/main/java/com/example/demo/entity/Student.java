@@ -7,6 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Column;
 @Entity
 public class Student{
+    public enum Role{
+        ADMIN,
+        STAFF
+    }
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -14,6 +18,8 @@ public class Student{
     @Column(unique=true)
     private String email;
     private String rollNumber;
+
+    private Role role=Role=STAFF;
 
     public Long getId(){
         return id;
