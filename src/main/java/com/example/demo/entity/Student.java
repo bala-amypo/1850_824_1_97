@@ -8,5 +8,9 @@ import jakarta.persistence.Entity;
 @Entity
 public class Student{
     @Id
-    @GeneratedValue(strateg)
+    @GeneratedValue(strategy=GenerationType.Identity)
+    private Long id;
+    @column(unique=true)
+    private String templateName;
+
 }
