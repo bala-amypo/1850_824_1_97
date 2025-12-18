@@ -14,7 +14,7 @@ public class VerificationLog{
     public String Status={
         SUCCESS,
         FAILED
-    } 
+    } ;
     private Status status;
     private String ipAddress;
     public Long getId() {
@@ -51,8 +51,9 @@ public class VerificationLog{
     }
     public VerificationLog(Long id,LocalDateTime verifiedAt,Status status,String ipAddress){
         this.id=id;
-        this verifiedAt=verifiedAt;
+        this.verifiedAt=verifiedAt;
         this.status=status;
-        this.ipAddress=
+        this.ipAddress=ipAddress;
     }
+    public VerificationLog(){}
 }
