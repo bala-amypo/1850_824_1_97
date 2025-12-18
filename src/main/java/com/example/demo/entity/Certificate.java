@@ -5,11 +5,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import.java.time.LocalDate;
+import java.time.LocalDate;
 
 @Entity
 public class Certificate{
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private LocalDate issuedDate;
     private String qrCodeUrl;
@@ -46,7 +47,7 @@ public class Certificate{
     public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
     }
-    public Certificate(Long id,String issuedDate,String qrCodeUrl,String verificationCode){
+    public Certificate(Long id,LocalDate issuedDate,String qrCodeUrl,String verificationCode){
         this.id=id;
         this.issuedDate=issuedDate;
         this.qrCodeUrl=qrCodeUrl;
