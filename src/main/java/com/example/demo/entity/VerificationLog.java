@@ -5,4 +5,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+@Entity
+public class VerificationLog{
+    @Id
+    private Long id;
+    
+}
