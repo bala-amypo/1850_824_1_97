@@ -47,7 +47,11 @@ public class Certificate{
         this.verificationCode = verificationCode;
     }
     public Certificate(Long id,String issuedDate,String qrCodeUrl,String verificationCode){
-        this.i
+        this.id=id;
+        this.issuedDate=issuedDate;
+        this.qrCodeUrl=qrCodeUrl;
+        this.certificate=certificate;
     }
+    public Certificate(){}
 
 }
