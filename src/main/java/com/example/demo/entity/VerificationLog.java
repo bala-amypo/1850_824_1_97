@@ -11,5 +11,5 @@ public class VerificationLog{
     @Id
     private Long id;
     private LocalDateTime verifiedAt;
-    
+    public String Status 
 }
