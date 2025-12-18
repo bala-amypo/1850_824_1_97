@@ -9,12 +9,13 @@ import java.time.LocalDateTime;
 @Entity
 public class VerificationLog{
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime verifiedAt;
-    public String Status={
+    public enum Status {
         SUCCESS,
         FAILED
-    } ;
+    }
     private Status status;
     private String ipAddress;
     public Long getId() {
