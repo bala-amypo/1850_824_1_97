@@ -10,5 +10,6 @@ import java.time.LocalDateTime;
 public class VerificationLog{
     @Id
     private Long id;
+    private LocalDateTime verifiedAt;
     
 }
