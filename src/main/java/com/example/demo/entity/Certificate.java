@@ -51,7 +51,7 @@ public class Certificate{
         this.id=id;
         this.issuedDate=issuedDate;
         this.qrCodeUrl=qrCodeUrl;
-        this.certificate=certificate;
+        this.verificationCode=verificationCode;
     }
     public Certificate(){}
 
