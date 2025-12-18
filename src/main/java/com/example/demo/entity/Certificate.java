@@ -16,4 +16,38 @@ public class Certificate{
     @Column(unique=true)
     private String verificationCode;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getIssuedDate() {
+        return issuedDate;
+    }
+    public void setIssuedDate(LocalDate issuedDate) {
+        this.issuedDate = issuedDate;
+    }
+    public String getQrCodeUrl() {
+        return qrCodeUrl;
+    }
+
+
+    public void setQrCodeUrl(String qrCodeUrl) {
+        this.qrCodeUrl = qrCodeUrl;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+    public Certificate(Long id,String issuedDate,String qrCodeUrl,String verificationCode){
+        this.i
+    }
+
 }
