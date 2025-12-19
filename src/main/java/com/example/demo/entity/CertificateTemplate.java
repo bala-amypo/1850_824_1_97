@@ -1,20 +1,25 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 
 @Entity
-public class CertificateTemplate{
+@Table(name = "certificate_templates")
+public class CertificateTemplate {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true)
-    private String templateName;
-    private String backgroundUrl;
-    private String fontStyle;
-    private String signatureName;
+
+    @Column(unique = true, nullable = false)
+    private String name;
+
+    @Column(length = 500)
+    private String description;
+
+    public CertificateTemplate() {
+    }
+
+    // ===== GETTERS & SETTERS =====
 
     public Long getId() {
         return id;
@@ -23,41 +28,20 @@ public class CertificateTemplate{
     public void setId(Long id) {
         this.id = id;
     }
-    public String getTemplateName() {
-        return templateName;
+
+    public String getName() {        // 🔥 THIS FIXES YOUR ERROR
+        return name;
     }
 
-    public void setTemplateName(String templateName) {
-        this.templateName = templateName;
-    }
-    public String getBackgroundUrl() {
-        return backgroundUrl;
-    }
-    public void setBackgroundUrl(String backgroundUrl) {
-        this.backgroundUrl = backgroundUrl;
+    public void setName(String name) {
+        this.name = name;
     }
 
-
-    public String getFontStyle() {
-        return fontStyle;
+    public String getDescription() {
+        return description;
     }
-    public void setFontStyle(String fontStyle) {
-        this.fontStyle = fontStyle;
+    
+    public void setDescription(String description) {
+        this.description = description;
     }
-    public String getSignatureName() {
-        return signatureName;
-    }
-
-    public void setSignatureName(String signatureName) {
-        this.signatureName = signatureName;
-    }
-    public CertificateTemplate(Long id,String templateName,String backgroundUrl,String fontStyle,String signatureName){
-        this.id=id;
-        this.templateName=templateName;
-        this.backgroundUrl=backgroundUrl;
-        this.fontStyle=fontStyle;
-        this.signatureName=signatureName;
-
-    }
-    public CertificateTemplate(){}
 }
