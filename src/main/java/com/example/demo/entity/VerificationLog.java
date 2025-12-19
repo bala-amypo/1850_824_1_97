@@ -20,6 +20,13 @@ public class VerificationLog {
     private LocalDateTime verifiedAt;
 
     @Enumerated(EnumType.STRING)
+   
+
+public enum VerificationStatus {
+    SUCCESS,
+    FAILED
+}
+
     private VerificationStatus status;
 
     private String ipAddress;
@@ -59,5 +66,15 @@ public class VerificationLog {
     public void setCertificate(Certificate certificate) {
         this.certificate = certificate;
     }
+
+    public VerificationLog(Long id, LocalDateTime verifiedAt, VerificationStatus status, String ipAddress,
+            Certificate certificate) {
+        this.id = id;
+        this.verifiedAt = verifiedAt;
+        this.status = status;
+        this.ipAddress = ipAddress;
+        this.certificate = certificate;
+    }
+    public VerificationLog(){}
     
 }
