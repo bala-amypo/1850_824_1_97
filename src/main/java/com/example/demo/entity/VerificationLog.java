@@ -5,8 +5,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.EnumType;
+//import jakarta.persistence.Enumerated;
+//import jakarta.persistence.EnumType;
 
 import java.time.LocalDateTime;
 
@@ -19,7 +19,6 @@ public class VerificationLog {
 
     private LocalDateTime verifiedAt;
 
-    @Enumerated(EnumType.STRING)
    
 
 public enum VerificationStatus {
