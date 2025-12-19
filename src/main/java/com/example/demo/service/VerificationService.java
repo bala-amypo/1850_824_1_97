@@ -1,11 +1,10 @@
-// package com.example.demo.service;
+package com.example.demo.service;
 
-// import java.util.List;
-// import com.example.demo.entity.VerificationLog;
+import com.example.demo.entity.VerificationLog;
 
-// public interface VerificationService {
+import java.util.List;
 
-//     VerificationLog verifyCertificate(String verificationCode, String clientIp);
-
-//     List<VerificationLog> getLogsByCertificate(Long certificateId);
-// }
+public interface VerificationService {
+    VerificationLog verifyCertificate(String verificationCode, String clientIp);
+    List<VerificationLog> getLogsByCertificate(Long certificateId);
+}
