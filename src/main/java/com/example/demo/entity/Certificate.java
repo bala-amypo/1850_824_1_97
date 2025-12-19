@@ -87,6 +87,13 @@ public class Certificate {
     public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
     }
-    public Certificate(
-
+     public Certificate(Long id, LocalDate issuedDate, String qrCodeUrl, Student student, CertificateTemplate template, String verificationCode) {
+        this.id = id;
+        this.issuedDate = issuedDate;
+        this.qrCodeUrl = qrCodeUrl;
+        this.student = student;
+        this.template = template;
+        this.verificationCode = verificationCode;
+    }
+    public Certificate(){}
 }
