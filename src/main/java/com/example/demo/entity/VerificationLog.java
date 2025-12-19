@@ -1,6 +1,10 @@
 package com.example.demo.entity;
 
-
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import java.time.LocalDateTime;
 
 @Entity
@@ -12,7 +16,7 @@ public class VerificationLog {
 
     private LocalDateTime verifiedAt;
 
-    @Enumerated(EnumType.STRING)
+    // @Enumerated(EnumType.STRING)
     private VerificationStatus status;
 
     private String ipAddress;
