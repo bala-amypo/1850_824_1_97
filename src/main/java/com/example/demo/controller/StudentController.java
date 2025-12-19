@@ -8,24 +8,27 @@ import com.example.demo.entity.Student;
 import com.example.demo.service.StudentService;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/api/students")
 public class StudentController {
 
-    private final StudentService studentService;
+    private final StudentService service;
 
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
+    public StudentController(StudentService service) {
+        this.service = service;
     }
 
-    // POST /students
     @PostMapping
-    public Student addStudent(@RequestBody Student student) {
-        return studentService.addStudent(student);
+    public Student add(@RequestBody Student student) {
+        return service.addStudent(student);
     }
 
-    // GET /students
     @GetMapping
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+    public List<Student> getAll() {
+        return service.getAllStudents();
+    }
+
+    @GetMapping("/{id}")
+    public Student getById(@PathVariable Long id) {
+        return service.findById(id);
     }
 }
