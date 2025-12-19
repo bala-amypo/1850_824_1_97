@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.entity.Student;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
-import com.example.demo.exception.ResourceNotFoundException;
+//import com.example.demo.exception.ResourceNotFoundException;
 
 @Service
 @Transactional
@@ -23,9 +23,9 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student addStudent(Student student) {
         repo.findByEmail(student.getEmail())
-                .ifPresent(s -> {
-                    throw new IllegalArgumentException("Student email exists");
-                });
+            .ifPresent(s -> {
+                throw new IllegalArgumentException("Student email exists");
+            });
         return repo.save(student);
     }
 
@@ -37,6 +37,6 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student findById(Long id) {
         return repo.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Student not found"));
     }
 }
