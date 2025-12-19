@@ -4,10 +4,9 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.demo.entity.CertificateTemplate;
+import com.example.demo.entity.Student;
 
-public interface CertificateTemplateRepository
-        extends JpaRepository<CertificateTemplate, Long> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    Optional<CertificateTemplate> findByName(String name);
+    Optional<Student> findByEmail(String email);
 }
