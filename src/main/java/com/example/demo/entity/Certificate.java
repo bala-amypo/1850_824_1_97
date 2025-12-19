@@ -1,15 +1,9 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Certificate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +23,70 @@ public class Certificate {
 
     @Column(unique = true)
     private String verificationCode;
+    
+   
+
+    public Long getId() {
+        return id;
+    }
+
+   
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+   
+    public Student getStudent() {
+        return student;
+    }
+
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public CertificateTemplate getTemplate() {
+        return template;
+    }
+
+   
+    public void setTemplate(CertificateTemplate template) {
+        this.template = template;
+    }
+
+    
+    public LocalDate getIssuedDate() {
+        return issuedDate;
+    }
+
+    
+    public void setIssuedDate(LocalDate issuedDate) {
+        this.issuedDate = issuedDate;
+    }
+
+    
+    public String getQrCodeUrl() {
+        return qrCodeUrl;
+    }
+
+   
+    public void setQrCodeUrl(String qrCodeUrl) {
+        this.qrCodeUrl = qrCodeUrl;
+    }
+
+    /**
+     * @return String return the verificationCode
+     */
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    /**
+     * @param verificationCode the verificationCode to set
+     */
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+    public Certificate(
+
 }
