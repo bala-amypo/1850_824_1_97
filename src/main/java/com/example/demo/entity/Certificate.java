@@ -74,16 +74,10 @@ public class Certificate {
         this.qrCodeUrl = qrCodeUrl;
     }
 
-    /**
-     * @return String return the verificationCode
-     */
     public String getVerificationCode() {
         return verificationCode;
     }
 
-    /**
-     * @param verificationCode the verificationCode to set
-     */
     public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
     }
