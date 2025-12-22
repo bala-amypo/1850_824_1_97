@@ -6,6 +6,5 @@ public interface CertificateService {
     Certificate generateCertificate(Long studentId, Long templateId);
     Certificate getCertificate(Long certificateId);
 
-    // Add this method
     Certificate getCertificateByCode(String verificationCode);
 }
