@@ -9,5 +9,5 @@ import com.example.demo.entity.CertificateTemplate;
 public interface CertificateTemplateRepository
         extends JpaRepository<CertificateTemplate, Long> {
 
-    Optional<CertificateTemplate> findByName(String name);
+    Optional<CertificateTemplate> findByTemplateName(String templateName);
 }
