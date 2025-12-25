@@ -6,27 +6,51 @@ import com.example.demo.dto.RegisterRequest;
 import com.example.demo.entity.User;
 import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
-import org.springframework.http.ResponseEntity;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
+
     private final UserService userService;
     private final JwtUtil jwtUtil;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public AuthController(UserService userService, JwtUtil jwtUtil) {
-        this.userService = userService;
-        this.jwtUtil = jwtUtil;
-    }
+    @PostMapping("/login")
+    public AuthResponse login(@RequestBody AuthRequest req) {
+        // You should validate the email/password against your DB here
+        User user = userService.getUserByEmail(req.getEmail());
 
-    public ResponseEntity<AuthResponse> login(AuthRequest req) {
-        var userOpt = userService.findByEmail(req.getEmail());
-        if (userOpt.isPresent() && new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().matches(req.getPassword(), userOpt.get().getPassword())) {
-            String token = jwtUtil.generateToken(userOpt.get().getEmail());
-            return ResponseEntity.ok(new AuthResponse(token));
+        if (user == null || !passwordEncoder.matches(req.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid credentials");
         }
-        return ResponseEntity.status(401).build();
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("role", user.getRole());
+
+        String token = jwtUtil.generateToken(claims, user.getEmail());
+
+        return new AuthResponse(token);
     }
 
-    public User register(RegisterRequest req) {
-        return userService.register(User.builder().name(req.getName()).email(req.getEmail()).password(req.getPassword()).role(req.getRole()).build());
+    @PostMapping("/register")
+    public String register(@RequestBody RegisterRequest req) {
+        User user = User.builder()
+                .name(req.getName())
+                .email(req.getEmail())
+                .password(passwordEncoder.encode(req.getPassword()))
+                .role(req.getRole())
+                .build();
+
+        userService.saveUser(user);
+
+        return "User registered successfully!";
     }
 }
