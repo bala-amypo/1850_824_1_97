@@ -1,17 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Certificate;
-import com.example.demo.service.VerificationService;
+import com.example.demo.service.impl.VerificationServiceImpl;
 
 public class VerificationController {
-
-    private final VerificationService service;
-
-    public VerificationController(VerificationService service) {
-        this.service = service;
-    }
-
-    public Certificate verify(String verificationCode) {
-        return service.verify(verificationCode);
-    }
+    private final VerificationServiceImpl verificationService;
+    public VerificationController(VerificationServiceImpl verificationService) { this.verificationService = verificationService; }
 }

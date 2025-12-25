@@ -1,34 +1,35 @@
 package com.example.demo.security;
 
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
+
+import java.security.Key;
 import java.util.Date;
 import java.util.Map;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-
 public class JwtUtil {
+    private final Key key;
+    private final long expirationMs;
 
-    private final String SECRET_KEY = "secret123";
-
-    public String generateToken(Map<String, Object> claims, String subject) {
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hour
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
-                .compact();
+    public JwtUtil(String secret, long expirationMs) {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.expirationMs = expirationMs;
     }
 
-    public Claims extractClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody();
+    public String generateToken(String subject) {
+        return Jwts.builder().setSubject(subject).setExpiration(new Date(System.currentTimeMillis() + expirationMs)).signWith(key).compact();
     }
 
-    public String extractUsername(String token) {
-        return extractClaims(token).getSubject();
+    public String generateToken(Map<String,Object> claims, String subject) {
+        return Jwts.builder().setClaims(claims).setSubject(subject).setExpiration(new Date(System.currentTimeMillis()+expirationMs)).signWith(key).compact();
+    }
+
+    public boolean validateToken(String token) {
+        try { Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token); return true; } 
+        catch (JwtException e) { return false; }
+    }
+
+    public Jws<Claims> parseToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
     }
 }

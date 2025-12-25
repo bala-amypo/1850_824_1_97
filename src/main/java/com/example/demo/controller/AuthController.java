@@ -1,16 +1,14 @@
 package com.example.demo.controller;
 
-import java.util.Map;
-
-import org.springframework.http.ResponseEntity;
-
-import com.example.demo.dto.*;
+import com.example.demo.dto.AuthRequest;
+import com.example.demo.dto.AuthResponse;
+import com.example.demo.dto.RegisterRequest;
 import com.example.demo.entity.User;
 import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
+import org.springframework.http.ResponseEntity;
 
 public class AuthController {
-
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
@@ -19,26 +17,16 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
-    public ResponseEntity<?> register(RegisterRequest request) {
-        User user = User.builder()
-                .name(request.getName())
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .role(request.getRole())
-                .build();
-
-        return ResponseEntity.ok(userService.register(user));
+    public ResponseEntity<AuthResponse> login(AuthRequest req) {
+        var userOpt = userService.findByEmail(req.getEmail());
+        if (userOpt.isPresent() && new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().matches(req.getPassword(), userOpt.get().getPassword())) {
+            String token = jwtUtil.generateToken(userOpt.get().getEmail());
+            return ResponseEntity.ok(new AuthResponse(token));
+        }
+        return ResponseEntity.status(401).build();
     }
 
-    public ResponseEntity<?> login(AuthRequest request) {
-        try {
-            User user = userService.findByEmail(request.getEmail());
-            String token = jwtUtil.generateToken(
-                    Map.of("email", user.getEmail(), "role", user.getRole()),
-                    user.getEmail());
-            return ResponseEntity.ok(new AuthResponse(token));
-        } catch (Exception e) {
-            return ResponseEntity.status(401).build();
-        }
+    public User register(RegisterRequest req) {
+        return userService.register(User.builder().name(req.getName()).email(req.getEmail()).password(req.getPassword()).role(req.getRole()).build());
     }
 }
