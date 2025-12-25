@@ -1,37 +1,56 @@
 package com.example.demo.service.impl;
 
-import org.springframework.stereotype.Service;
-import com.example.demo.entity.Certificate;
-import com.example.demo.repository.CertificateRepository;
+import java.util.List;
+import java.util.UUID;
+
+import com.example.demo.entity.*;
+import com.example.demo.repository.*;
 import com.example.demo.service.CertificateService;
 
-import java.time.LocalDate;
-
-@Service
 public class CertificateServiceImpl implements CertificateService {
 
     private final CertificateRepository certificateRepository;
+    private final StudentRepository studentRepository;
+    private final CertificateTemplateRepository templateRepository;
 
-    public CertificateServiceImpl(CertificateRepository certificateRepository) {
+    public CertificateServiceImpl(
+            CertificateRepository certificateRepository,
+            StudentRepository studentRepository,
+            CertificateTemplateRepository templateRepository) {
         this.certificateRepository = certificateRepository;
+        this.studentRepository = studentRepository;
+        this.templateRepository = templateRepository;
     }
 
     @Override
     public Certificate generateCertificate(Long studentId, Long templateId) {
+        Student student = studentRepository.findById(studentId).orElseThrow();
+        CertificateTemplate template = templateRepository.findById(templateId).orElseThrow();
+
         Certificate certificate = new Certificate();
-        certificate.setIssuedDate(LocalDate.now());
-        certificate.setVerificationCode("VER-" + System.currentTimeMillis());
-        // Set student and template associations here
+        certificate.setStudent(student);
+        certificate.setTemplate(template);
+        certificate.setVerificationCode("VC-" + UUID.randomUUID());
+        certificate.setQrCodeUrl("data:image/png;base64,ABC123");
+
         return certificateRepository.save(certificate);
     }
 
     @Override
-    public Certificate getCertificate(Long certificateId) {
-        return certificateRepository.findById(certificateId).orElse(null);
+    public Certificate getCertificate(Long id) {
+        return certificateRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Certificate not found"));
     }
 
     @Override
-    public Certificate getCertificateByCode(String verificationCode) {
-        return certificateRepository.findByVerificationCode(verificationCode).orElse(null);
+    public Certificate findByVerificationCode(String code) {
+        return certificateRepository.findByVerificationCode(code)
+                .orElseThrow(() -> new RuntimeException("Certificate not found"));
+    }
+
+    @Override
+    public List<Certificate> findByStudentId(Long studentId) {
+        Student student = studentRepository.findById(studentId).orElseThrow();
+        return certificateRepository.findByStudent(student);
     }
 }
