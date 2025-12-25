@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter @Setter @Builder
-@NoArgsConstructor @AllArgsConstructor
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Certificate {
 
     @Id
@@ -13,6 +15,8 @@ public class Certificate {
     private Long id;
 
     private String verificationCode;
+
+    @Lob
     private String qrCodeUrl;
 
     @ManyToOne

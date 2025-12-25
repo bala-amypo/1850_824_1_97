@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter @Setter
+@Data
 public class VerificationLog {
 
     @Id
@@ -13,4 +13,5 @@ public class VerificationLog {
 
     private String status;
     private String ipAddress;
+    private LocalDateTime verifiedAt = LocalDateTime.now();
 }
