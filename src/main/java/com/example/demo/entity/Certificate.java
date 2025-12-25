@@ -1,27 +1,24 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
-@Entity
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
 public class Certificate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String verificationCode;
-
-    @Lob
-    private String qrCodeUrl;
-
     @ManyToOne
     private Student student;
 
     @ManyToOne
     private CertificateTemplate template;
+
+    private String verificationCode;
+    private String qrCodeUrl;
 }

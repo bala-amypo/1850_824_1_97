@@ -1,13 +1,12 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
-@Entity
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
 public class Student {
 
     @Id
@@ -15,10 +14,6 @@ public class Student {
     private Long id;
 
     private String name;
-
-    @Column(unique = true)
     private String email;
-
-    @Column(unique = true)
     private String rollNumber;
 }
