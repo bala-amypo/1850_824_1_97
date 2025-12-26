@@ -24,6 +24,7 @@
     </properties>
 
     <dependencies>
+
         <!-- Spring Boot Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -36,14 +37,12 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- H2 Database (runtime) -->
+        <!-- MariaDB JDBC Driver -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
             <scope>runtime</scope>
         </dependency>
-
-        
 
         <!-- Spring Security Crypto (BCrypt) -->
         <dependency>
@@ -77,6 +76,14 @@
             <version>2.3.0</version>
         </dependency>
 
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.32</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
@@ -85,7 +92,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Spring Boot Test (exclude JUnit if using TestNG) -->
+        <!-- Spring Boot Test (JUnit excluded, TestNG used) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -97,18 +104,13 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-    <groupId>org.projectlombok</groupId>
-    <artifactId>lombok</artifactId>
-    <version>1.18.32</version>
-    <scope>provided</scope>
-</dependency>
 
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Java Compiler -->
+
+            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -119,7 +121,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Surefire plugin for TestNG -->
+            <!-- Surefire Plugin for TestNG -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -130,6 +132,13 @@
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
+
+            <!-- Spring Boot Plugin -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
         </plugins>
     </build>
 
