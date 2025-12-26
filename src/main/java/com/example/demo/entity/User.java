@@ -1,25 +1,35 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
-
-@Entity
-@Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String name;
-
-    @Column(unique = true)
     private String email;
-
+    private String username;
     private String password;
 
-    private String role; // ADMIN / STAFF
+    public User() {
+    }
+
+    public User(Long id, String email, String username, String password) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }
