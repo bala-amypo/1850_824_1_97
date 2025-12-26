@@ -1,81 +1,35 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String name;
+
+    @Column(unique = true)
     private String email;
-    private String username;
+
     private String password;
+
     private String role;
 
-    public User() {
-    }
-
-    public User(Long id, String email, String username, String password, String role) {
-        this.id = id;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
-
-    // 🔹 REQUIRED by tests
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static class Builder {
-        private Long id;
-        private String email;
-        private String username;
-        private String password;
-        private String role;
-
-        public Builder id(Long id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder email(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public Builder username(String username) {
-            this.username = username;
-            return this;
-        }
-
-        public Builder password(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public Builder role(String role) {
-            this.role = role;
-            return this;
-        }
-
-        public User build() {
-            return new User(id, email, username, password, role);
-        }
-    }
-
-    // 🔹 REQUIRED by tests
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    // -------- GETTERS --------
     public Long getId() {
         return id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
@@ -84,5 +38,26 @@ public class User {
 
     public String getRole() {
         return role;
+    }
+
+    // -------- SETTERS (THIS FIXES YOUR ERROR) --------
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
