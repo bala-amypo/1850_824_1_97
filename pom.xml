@@ -84,13 +84,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- TestNG -->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.8.0</version>
-            <scope>test</scope>
-        </dependency>
+        
         <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
 <dependency>
     <groupId>com.mysql</groupId>
