@@ -1,36 +1,27 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class VerificationLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String verificationCode;
-    private String status;
+    @ManyToOne
+    private Certificate certificate;
+
+    private LocalDateTime verifiedAt;
+
+    private String status; // SUCCESS / FAILED
+
     private String ipAddress;
-    private LocalDateTime createdAt;
-
-    public VerificationLog() {
-        this.createdAt = LocalDateTime.now();
-    }
-
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public String getVerificationCode() { return verificationCode; }
-    public void setVerificationCode(String verificationCode) { this.verificationCode = verificationCode; }
-
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
-
-    public String getIpAddress() { return ipAddress; }
-    public void setIpAddress(String ipAddress) { this.ipAddress = ipAddress; }
-
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

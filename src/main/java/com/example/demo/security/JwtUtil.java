@@ -1,41 +1,26 @@
 package com.example.demo.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-
-import java.util.Date;
-import java.util.Map;
+import io.jsonwebtoken.*;
+import java.util.*;
 
 public class JwtUtil {
 
-    private final String secret = "your-secret-key"; // Replace with a secure key
-    private final long expirationMillis = 1000 * 60 * 60; // 1 hour
+    private final String secret;
+    private final Long expirationMs;
 
-    // Generate token with claims and subject
-    public String generateToken(Map<String, Object> claims, String subject) {
+    public JwtUtil(String secret, Long expirationMs) {
+        this.secret = secret;
+        this.expirationMs = expirationMs;
+    }
+
+    public String generateToken(Long userId, String email, String role) {
         return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expirationMillis))
+                .setSubject(email)
+                .claim("userId", userId)
+                .claim("role", role)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
-    }
-
-    // Extract claims
-    public Claims extractClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token)
-                .getBody();
-    }
-
-    public boolean isTokenExpired(String token) {
-        return extractClaims(token).getExpiration().before(new Date());
-    }
-
-    public String extractUsername(String token) {
-        return extractClaims(token).getSubject();
     }
 }
