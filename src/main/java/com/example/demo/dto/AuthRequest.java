@@ -1,33 +1,7 @@
 package com.example.demo.dto;
-
+import lombok.Data;
+@Data
 public class AuthRequest {
-
     private String email;
     private String password;
-
-    public AuthRequest() {
-    }
-
-    public AuthRequest(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    // 🔹 REQUIRED by tests
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    // 🔹 REQUIRED by tests
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 }
