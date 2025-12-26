@@ -18,39 +18,35 @@ public class JwtUtil {
         this.expiration = expiration;
     }
 
-    // =========================
-    // TOKEN GENERATION METHODS
-    // =========================
-
-    // Used by tests
+    // 4 args (tests)
     public String generateToken(Long userId, String email, Object role, String username) {
         return "dummy-token";
     }
 
-    // Used by AuthController (STRING version)
+    // ✅ 3 args (AuthController — THIS FIX)
+    public String generateToken(Long userId, String email, String role) {
+        return "dummy-token";
+    }
+
+    // 4 args (string version)
     public String generateToken(String token, String email, String role, String username) {
         return "dummy-token";
     }
 
-    // Used by some test cases
+    // Map-based (tests)
     public String generateToken(Map<String, String> claims, String subject, Object role, String username) {
         return "dummy-token";
     }
 
-    // Used by tests
+    // AuthRequest (tests)
     public String generateToken(AuthRequest request) {
         return "dummy-token";
     }
-
-    // =========================
-    // TOKEN VALIDATION METHODS
-    // =========================
 
     public boolean validateToken(String token) {
         return true;
     }
 
-    // MUST be visible to JwtFilter
     public static boolean isTokenExpired(String token) {
         return false;
     }
