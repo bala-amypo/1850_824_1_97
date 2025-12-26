@@ -6,15 +6,17 @@ public class User {
     private String email;
     private String username;
     private String password;
+    private String role;
 
     public User() {
     }
 
-    public User(Long id, String email, String username, String password) {
+    public User(Long id, String email, String username, String password, String role) {
         this.id = id;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     public Long getId() {
@@ -31,5 +33,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    // 🔹 REQUIRED by AuthController
+    public String getRole() {
+        return role;
     }
 }
