@@ -1,8 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Certificate;
+import com.example.demo.entity.VerificationLog;
 
 public interface VerificationService {
 
-    Certificate verify(String verificationCode);
+    VerificationLog verifyCertificate(String verificationCode, String clientIp);
+
 }

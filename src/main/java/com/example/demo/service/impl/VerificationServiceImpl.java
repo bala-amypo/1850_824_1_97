@@ -4,20 +4,37 @@ import com.example.demo.entity.Certificate;
 import com.example.demo.entity.VerificationLog;
 import com.example.demo.repository.CertificateRepository;
 import com.example.demo.repository.VerificationLogRepository;
-import lombok.RequiredArgsConstructor;
+import com.example.demo.service.VerificationService;
+import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
-public class VerificationServiceImpl {
+import java.time.LocalDateTime;
+
+@Service
+public class VerificationServiceImpl implements VerificationService {
+
     private final CertificateRepository certificateRepository;
     private final VerificationLogRepository logRepository;
 
-    public boolean verifyCertificate(String code, String ip) {
-        Certificate c = certificateRepository.findByVerificationCode(code).orElse(null);
-        VerificationLog log = new VerificationLog();
-        log.setVerificationCode(code);
-        log.setIpAddress(ip);
-        log.setStatus(c != null ? "SUCCESS" : "FAIL");
-        logRepository.save(log);
-        return c != null;
+    public VerificationServiceImpl(CertificateRepository certificateRepository,
+                                   VerificationLogRepository logRepository) {
+        this.certificateRepository = certificateRepository;
+        this.logRepository = logRepository;
+    }
+
+    @Override
+    public VerificationLog verifyCertificate(String verificationCode, String clientIp) {
+
+        Certificate certificate = certificateRepository
+                .findByVerificationCode(verificationCode)
+                .orElseThrow(() -> new RuntimeException("Certificate not found"));
+
+        VerificationLog log = VerificationLog.builder()
+                .certificate(certificate)
+                .verifiedAt(LocalDateTime.now())
+                .status("SUCCESS")
+                .ipAddress(clientIp)
+                .build();
+
+        return logRepository.save(log);
     }
 }
