@@ -13,6 +13,16 @@ public class AuthRequest {
         this.password = password;
     }
 
+    // 🔹 REQUIRED by tests
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    // 🔹 REQUIRED by tests
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getEmail() {
         return email;
     }
