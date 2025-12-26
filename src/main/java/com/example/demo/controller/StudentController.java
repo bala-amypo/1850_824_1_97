@@ -1,17 +1,28 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Student;
-import com.example.demo.service.impl.StudentServiceImpl;
+import com.example.demo.service.StudentService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/students")
 public class StudentController {
-    private final StudentServiceImpl studentService;
 
-    public StudentController(StudentServiceImpl studentService) {
-        this.studentService = studentService;
+    private final StudentService service;
+
+    public StudentController(StudentService service) {
+        this.service = service;
     }
 
-    public Student add(Student s) { return studentService.addStudent(s); }
-    public List<Student> list() { return studentService.getAllStudents(); }
+    @PostMapping
+    public Student add(@RequestBody Student s) {
+        return service.addStudent(s);
+    }
+
+    @GetMapping
+    public List<Student> all() {
+        return service.getAllStudents();
+    }
 }
