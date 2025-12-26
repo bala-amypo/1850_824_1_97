@@ -6,3 +6,4 @@ public class VerificationController {
     private final VerificationServiceImpl verificationService;
     public VerificationController(VerificationServiceImpl verificationService) { this.verificationService = verificationService; }
 }
+
