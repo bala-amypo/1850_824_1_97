@@ -13,10 +13,31 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    // ✅ MUST override
+    // ✅ NO-ARGS constructor REQUIRED by tests
+    public UserServiceImpl() {
+    }
+
+    // Optional constructor
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    // ✅ REQUIRED
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    // ✅ REQUIRED
+    @Override
+    public User register(User user) {
+        return userRepository.save(user);
     }
 }

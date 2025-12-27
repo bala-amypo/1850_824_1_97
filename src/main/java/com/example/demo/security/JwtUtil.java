@@ -12,8 +12,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtUtil {
 
     private static final String SECRET_KEY = "secret123";
+    private static final long EXPIRATION = 3600000;
 
-    // ✅ validateToken(String token)
+    // ✅ NO-ARGS constructor REQUIRED
+    public JwtUtil() {
+    }
+
     public boolean validateToken(String token) {
         try {
             Jwts.parser()
@@ -25,22 +29,19 @@ public class JwtUtil {
         }
     }
 
-    // ✅ parseToken(String token)
     public String parseToken(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)
                 .getBody();
-
         return claims.getSubject();
     }
 
-    // (optional but usually needed)
     public String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
     }

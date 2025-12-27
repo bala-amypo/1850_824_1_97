@@ -10,6 +10,8 @@ import com.example.demo.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    // ✅ REQUIRED
     Optional<User> findByUsername(String username);
+
+    // ✅ REQUIRED BY TESTS
+    Optional<User> findByEmail(String email);
 }
