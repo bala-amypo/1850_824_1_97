@@ -50,4 +50,15 @@ public class JwtFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+        return path.startsWith("/auth")
+                || path.startsWith("/swagger-ui")
+                || path.startsWith("/v3/api-docs")
+                || path.equals("/")
+                || path.equals("/error")
+                || path.startsWith("/students")     // <<< allow public student creation
+                || path.startsWith("/templates");   // <<< allow public template creation
+    }
 }
