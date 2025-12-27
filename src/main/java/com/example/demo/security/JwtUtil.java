@@ -1,29 +1,47 @@
 package com.example.demo.security;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtUtil {
 
-    // Existing method
-    public String generateToken(Long id, String email, Object role, String secret) {
-        return "dummy-token";
+    private static final String SECRET_KEY = "secret123";
+
+    // ✅ validateToken(String token)
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    // REQUIRED by tests
-    public String generateToken(Long id, String email, String role, String secret) {
-        return "dummy-token";
+    // ✅ parseToken(String token)
+    public String parseToken(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.getSubject();
     }
 
-    // REQUIRED by tests
-    public String generateToken(Map<String, Object> claims, String email, String secret) {
-        return "dummy-token";
-    }
-
-    // REQUIRED by tests
-    public String generateToken(Object authRequest) {
-        return "dummy-token";
+    // (optional but usually needed)
+    public String generateToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
     }
 }
