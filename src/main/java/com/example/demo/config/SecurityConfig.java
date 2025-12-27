@@ -46,6 +46,7 @@ public class SecurityConfig {
                 // Requirement 8.3: Permit all swagger paths
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 .requestMatchers("/students").permitAll() 
+                  .requestMatchers("/templates").permitAll()  
                 
                 // All other paths (students, templates, certificates, etc.) require authentication
                 .anyRequest().authenticated()
