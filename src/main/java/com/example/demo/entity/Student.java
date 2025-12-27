@@ -1,13 +1,16 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.List;
 
 @Entity
-@Getter @Setter
+@Table(name = "students")
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Student {
 
     @Id
@@ -21,4 +24,8 @@ public class Student {
 
     @Column(unique = true)
     private String rollNumber;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @JsonIgnore  // <--- THIS FIXES THE LOOP ERROR
+    private List<Certificate> certificates;
 }

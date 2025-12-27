@@ -6,26 +6,30 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Getter @Setter
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Table(name = "certificates")
 public class Certificate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Student student;
+    private String verificationCode;
 
-    @ManyToOne
-    private CertificateTemplate template;
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
+    private String qrCodeUrl;
 
     private LocalDate issuedDate;
 
-    private String qrCodeUrl;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
 
-    @Column(unique = true)
-    private String verificationCode;
+    @ManyToOne
+    @JoinColumn(name = "template_id")
+    private CertificateTemplate template;
 }
